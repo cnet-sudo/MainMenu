@@ -12,12 +12,12 @@ class GameMenu
 	sf::Font font;
 	sf::Text mainMenu[max_menu];
 
-	void setInitFont(sf::Text & text, std::string str, float ypos);
+	void setInitFont(sf::Text & text, std::string str, float xpos, float ypos);
 
 	std::string str[4]{ "Play","Options","About","Exit" };
 
 public:
-	GameMenu(float width,float height);
+	GameMenu(float xpos, float ypos);
 
 	void Draw(sf::RenderWindow & window);
 
@@ -30,7 +30,7 @@ public:
 		return mainMenuSelected;
 	}
 
-	~GameMenu();
+	
 };
 
 }

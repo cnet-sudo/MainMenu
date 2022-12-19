@@ -1,56 +1,65 @@
 #include "GameMenu.h"
 
-void game::GameMenu::setInitFont(sf::Text& text, std::string str, float ypos)
+void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos,float ypos)
 {
 	text.setFont(font);
 	text.setFillColor(sf::Color::White);
 	text.setString(str);
 	text.setCharacterSize(60);
-	text.setPosition(540, ypos);
+	text.setPosition(xpos, ypos);
 	text.setOutlineThickness(3);
 	text.setOutlineColor(sf::Color::Black);
 }
 
-game::GameMenu::GameMenu(float width, float height)
+game::GameMenu::GameMenu(float menux, float menuy)
 {
 	if (!font.loadFromFile("font/troika.otf"))
 	{
 		std::cout << "No font is here";
 	}
+	float menu_x;
 
-	for (int i = 0, ypos=150; i < max_menu; i++, ypos+=100)
-		setInitFont(mainMenu[i], str[i], ypos);
+	for (int i = 0, ypos= menuy; i < max_menu; i++, ypos+=100)
+		setInitFont(mainMenu[i], str[i], menux, ypos);
 	
-	mainMenuSelected = -1;
+	mainMenuSelected = 0;
+	mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
+
 }
 
 void game::GameMenu::MoveUp()
 {
-	if (mainMenuSelected - 1 >= 0){
-		mainMenu[mainMenuSelected].setFillColor(sf::Color::White);
-	    mainMenuSelected--;
-		if (mainMenuSelected == -1) mainMenuSelected = 2;
+    mainMenuSelected--;
+
+	if (mainMenuSelected >= 0) {
+		mainMenu[mainMenuSelected + 1].setFillColor(sf::Color::White);
+		mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
+	}
+	else
+	{
+		mainMenu[0].setFillColor(sf::Color::White);
+		mainMenuSelected = max_menu - 1;
 		mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
 	}
 }
 
 void game::GameMenu::MoveDown()
 {
-	if (mainMenuSelected + 1 <= max_menu)
-	{
-		mainMenu[mainMenuSelected].setFillColor(sf::Color::White);
-		mainMenuSelected++;
-		if (mainMenuSelected == 4) mainMenuSelected = 0;
+	mainMenuSelected++;
+
+	if (mainMenuSelected < max_menu) {
+		mainMenu[mainMenuSelected - 1].setFillColor(sf::Color::White);
 		mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
-
 	}
+	else
+	{
+		mainMenu[3].setFillColor(sf::Color::White);
+		mainMenuSelected = 0;
+		mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
+	}
+	
 }
 
-game::GameMenu::~GameMenu() 
-{
-
-
-}
 
 void game::GameMenu::Draw(sf::RenderWindow& window)
 {
