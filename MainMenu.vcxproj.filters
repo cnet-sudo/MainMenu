@@ -28,8 +28,6 @@
     <None Include="sfml-audio-d-2.dll" />
     <None Include="sfml-graphics-2.dll" />
     <None Include="sfml-graphics-d-2.dll" />
-    <None Include="sfml-network-2.dll" />
-    <None Include="sfml-network-d-2.dll" />
     <None Include="sfml-system-2.dll" />
     <None Include="sfml-system-d-2.dll" />
     <None Include="sfml-window-2.dll" />
