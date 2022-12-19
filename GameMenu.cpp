@@ -11,16 +11,23 @@ void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos,flo
 	text.setOutlineColor(sf::Color::Black);
 }
 
-game::GameMenu::GameMenu(float menux, float menuy)
+void game::GameMenu::setStringMenu(int index, sf::String name) 
 {
+	mainMenu[index].setString(name);
+}
+
+game::GameMenu::GameMenu(float menux, float menuy, int step, int len_menu)
+{
+	if (len_menu < 2) len_menu = 2;
+
 	if (!font.loadFromFile("font/troika.otf"))
 	{
 		std::cout << "No font is here";
 	}
-	float menu_x;
-
-	for (int i = 0, ypos= menuy; i < max_menu; i++, ypos+=100)
-		setInitFont(mainMenu[i], str[i], menux, ypos);
+	max_menu = len_menu;
+	mainMenu = new sf::Text[max_menu];
+	for (int i = 0, ypos = menuy; i < max_menu; i++, ypos += step) 
+		setInitFont(mainMenu[i], std::to_string(i)+" name", menux, ypos);
 	
 	mainMenuSelected = 0;
 	mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
@@ -53,7 +60,7 @@ void game::GameMenu::MoveDown()
 	}
 	else
 	{
-		mainMenu[3].setFillColor(sf::Color::White);
+		mainMenu[max_menu-1].setFillColor(sf::Color::White);
 		mainMenuSelected = 0;
 		mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
 	}
@@ -61,7 +68,7 @@ void game::GameMenu::MoveDown()
 }
 
 
-void game::GameMenu::Draw(sf::RenderWindow& window)
+void game::GameMenu::draw(sf::RenderWindow& window)
 {
 	for (int i = 0; i < max_menu; i++) window.draw(mainMenu[i]);
 }

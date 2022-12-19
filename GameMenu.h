@@ -7,24 +7,26 @@ namespace game {
 
 class GameMenu
 {
-	static const int max_menu=4;
+    int max_menu;
 	int mainMenuSelected;
 	sf::Font font;
-	sf::Text mainMenu[max_menu];
+	sf::Text * mainMenu;
 
 	void setInitFont(sf::Text & text, std::string str, float xpos, float ypos);
 
-	std::string str[4]{ "Play","Options","About","Exit" };
+	
 
 public:
-	GameMenu(float xpos, float ypos);
+	GameMenu(float xpos, float ypos,int step, int len_menu);
 
-	void Draw(sf::RenderWindow & window);
+	void draw(sf::RenderWindow & window);
 
 	void MoveUp();
 
 	void MoveDown();
-
+    
+	void setStringMenu(int index,sf::String name);
+	
 	int getMainMenuPressed() 
 	{
 		return mainMenuSelected;
