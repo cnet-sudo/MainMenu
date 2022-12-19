@@ -87,10 +87,14 @@ int main()
     RenderWindow window(VideoMode(1280, 720), L"Моя игра", Style::Fullscreen);
     window.setMouseCursorVisible(false);
    
-    game::GameMenu mymenu(500, 150,80,4);
+    game::GameMenu mymenu(550, 150,80,4);
+
     mymenu.setStringMenu(0, L"Старт");
+    mymenu.setPositionX(1, -70);
     mymenu.setStringMenu(1, L"Настройки");
+    mymenu.setPositionX(2, -10);
     mymenu.setStringMenu(2, L"О игре");
+    mymenu.setPositionX(3, -15);
     mymenu.setStringMenu(3, L"Выход");
     
     RectangleShape background(Vector2f(1280, 720));

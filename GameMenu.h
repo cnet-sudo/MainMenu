@@ -26,6 +26,8 @@ public:
 	void MoveDown();
     
 	void setStringMenu(int index,sf::String name);
+
+	void setPositionX(int index, float x1);
 	
 	int getMainMenuPressed() 
 	{

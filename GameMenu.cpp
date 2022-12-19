@@ -16,6 +16,11 @@ void game::GameMenu::setStringMenu(int index, sf::String name)
 	mainMenu[index].setString(name);
 }
 
+void game::GameMenu::setPositionX(int index, float x1)
+{
+	mainMenu[index].setPosition(mainMenu[index].getPosition().x+x1, mainMenu[index].getPosition().y);
+}
+
 game::GameMenu::GameMenu(float menux, float menuy, int step, int len_menu)
 {
 	if (len_menu < 2) len_menu = 2;
