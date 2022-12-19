@@ -31,6 +31,10 @@ public:
 	{
 		return mainMenuSelected;
 	}
+	~GameMenu()
+	{
+		delete[] mainMenu;
+	}
 
 };
 
