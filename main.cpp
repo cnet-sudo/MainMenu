@@ -7,8 +7,7 @@ void GamaStart()
 {
     RenderWindow Play(VideoMode(1280, 720), L"Уровень 1", Style::Fullscreen);
 
-    RectangleShape background_play;
-    background_play.setSize(Vector2f(1280, 720));
+    RectangleShape background_play(Vector2f(1280, 720));
     Texture texture_play;
     texture_play.loadFromFile("image/menu4.jpg");
     background_play.setTexture(&texture_play);
@@ -28,7 +27,6 @@ void GamaStart()
 
 
         Play.clear();
-
         Play.draw(background_play);
         Play.display();
     }
@@ -38,8 +36,7 @@ void Options()
 {
     RenderWindow Options(VideoMode(1280, 720), L"Настройки", Style::Fullscreen);
 
-    RectangleShape background_opt;
-    background_opt.setSize(Vector2f(1280, 720));
+    RectangleShape background_opt(Vector2f(1280, 720));
     Texture texture_opt;
     texture_opt.loadFromFile("image/menu1.jpg");
     background_opt.setTexture(&texture_opt);
@@ -68,8 +65,7 @@ void About_Game()
 {
     RenderWindow About(VideoMode(1280, 720), L"О игре", Style::Fullscreen);
 
-    RectangleShape background_ab;
-    background_ab.setSize(Vector2f(1280, 720));
+    RectangleShape background_ab(Vector2f(1280, 720));
     Texture texture_ab;
     texture_ab.loadFromFile("image/menu2.jpg");
     background_ab.setTexture(&texture_ab);
@@ -104,8 +100,7 @@ int main()
     game::GameMenu mymenu(500, 150);
     
 
-    RectangleShape background;
-    background.setSize(Vector2f(1280,720));
+    RectangleShape background(Vector2f(1280, 720));
     Texture texture_window;
     texture_window.loadFromFile("image/menu9.jpg");
     background.setTexture(&texture_window);
