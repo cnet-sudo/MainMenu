@@ -3,6 +3,17 @@
 
 using namespace sf;
 
+void InitText(Text & mtext,float xpos, float ypos,String str, int size_font=60, Color menu_text_color=Color::White,int bord=0, Color border_color = Color::Black)
+{
+    mtext.setCharacterSize(size_font);
+    mtext.setPosition(xpos, ypos);
+    mtext.setString(str);
+    mtext.setFillColor(menu_text_color);
+    mtext.setOutlineThickness(bord);
+    mtext.setOutlineColor(border_color);
+
+}
+
 void GamеStart()
 {
     RenderWindow Play(VideoMode(1280, 720), L"Уровень 1", Style::Fullscreen);
@@ -87,7 +98,7 @@ int main()
     RenderWindow window(VideoMode(1280, 720), L"Моя игра", Style::Fullscreen);
     window.setMouseCursorVisible(false);
    
-    game::GameMenu mymenu(550, 150,80,4);
+    game::GameMenu mymenu(550, 250);
 
     mymenu.setStringMenu(0, L"Старт");
     mymenu.setPositionX(1, -70);
@@ -101,6 +112,17 @@ int main()
     Texture texture_window;
     texture_window.loadFromFile("image/menu9.jpg");
     background.setTexture(&texture_window);
+
+    Text Titul;
+    Font font;
+    if (!font.loadFromFile("font/troika.otf"))
+    {
+        std::cout << "No font is here";
+    }
+    Titul.setFont(font);
+    InitText(Titul,250,50,L"Пчела на работе",100, Color(237,147,0),3);
+
+
 
     while (window.isOpen())
     {
@@ -130,6 +152,7 @@ int main()
         
         window.clear(Color::Blue);
         window.draw(background);
+        window.draw(Titul);
         mymenu.draw(window);        
         window.display();
     }

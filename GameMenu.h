@@ -7,29 +7,35 @@ namespace game {
 
 class GameMenu
 {
-    int max_menu;
-	int mainMenuSelected;
-	sf::Font font;
-	sf::Text * mainMenu;
+    int max_menu;                // Максимальное количество пунктов меню
+	int size_font;               // Размер шрифта
+	int mainMenuSelected;        // Выбраное меню
+	sf::Font font;               // Шрифт меню 
+	sf::Text * mainMenu;         // Динамический массив названий меню
+	sf::Color menu_text_color;   // Цвет меню
+	sf::Color chose_text_color;  // Цвет выбора меню
+	sf::Color border_color;      // Цвет обводки текста
 
+	// Настройка шрифта меню
 	void setInitFont(sf::Text & text, std::string str, float xpos, float ypos);
 
-	
-
 public:
-	GameMenu(float xpos, float ypos,int step, int len_menu);
-
+	
+	GameMenu(float menux, float menuy, int sizeFont = 60, int step = 80, int len_menu = 4);
+	// Рисуем меню
 	void draw(sf::RenderWindow & window);
 
-	void MoveUp();
+	void MoveUp();               // Перемещение меню вверх
 
-	void MoveDown();
+	void MoveDown();             // Перемещение меню вниз
     
-	void setStringMenu(int index,sf::String name);
+	void setStringMenu(int index,sf::String name);  // Текст меню
 
-	void setPositionX(int index, float x1);
+	void setColotTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor);  // Цвет меню
+
+	void setPositionX(int index, float x1);  // Отцентров отдельных пунктов меню
 	
-	int getMainMenuPressed() 
+	int getMainMenuPressed()                 // Возвращае номер выбраного элемента
 	{
 		return mainMenuSelected;
 	}
