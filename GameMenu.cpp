@@ -64,5 +64,4 @@ void game::GameMenu::MoveDown()
 void game::GameMenu::Draw(sf::RenderWindow& window)
 {
 	for (int i = 0; i < max_menu; i++) window.draw(mainMenu[i]);
-
 }

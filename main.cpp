@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-void GamaStart()
+void GamåStart()
 {
     RenderWindow Play(VideoMode(1280, 720), L"Óðîâåíü 1", Style::Fullscreen);
 
@@ -21,11 +21,8 @@ void GamaStart()
             if (event_play.type == Event::KeyPressed)
             {
                 if (event_play.key.code == Keyboard::Escape) Play.close();
-
             }
         }
-
-
         Play.clear();
         Play.draw(background_play);
         Play.display();
@@ -49,11 +46,8 @@ void Options()
             if (event_opt.type == Event::KeyPressed)
             {
                 if (event_opt.key.code == Keyboard::Escape) Options.close();
-
             }
         }
-
-
         Options.clear();
         Options.draw(background_opt);
         Options.display();
@@ -79,11 +73,8 @@ void About_Game()
             if (event_play.type == Event::KeyPressed)
             {
                 if (event_play.key.code == Keyboard::Escape) About.close();
-
             }
         }
-
-
         About.clear();
         About.draw(background_ab);
         About.display();
@@ -96,10 +87,8 @@ int main()
     RenderWindow window(VideoMode(1280, 720), L"Ìîÿ èãðà", Style::Fullscreen);
     window.setMouseCursorVisible(false);
    
-    
     game::GameMenu mymenu(500, 150);
     
-
     RectangleShape background(Vector2f(1280, 720));
     Texture texture_window;
     texture_window.loadFromFile("image/menu9.jpg");
@@ -121,19 +110,14 @@ int main()
                 {                  
                     switch (mymenu.getMainMenuPressed())
                     {
-                    case 0:GamaStart(); break;
+                    case 0:GamåStart(); break;
                     case 1:Options(); break;
                     case 2:About_Game(); break;
                     case 3:window.close(); break;
-                    default:
-                        break;
+                   
                     }  
-                }
-                break;
-            default:
-                break;
+                } break;
             }
-
         }
         
         window.clear(Color::Blue);
