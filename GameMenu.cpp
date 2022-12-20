@@ -27,7 +27,7 @@ game::GameMenu::GameMenu(float menux, float menuy, int sizeFont, int step, int l
 	size_font = sizeFont;
 	if (!font.loadFromFile("font/troika.otf"))
 	{
-		std::cout << "No font is here";
+		std::cout << "No font is here"; 
 	}
 	
 	menu_text_color=sf::Color::White;      // ÷вет меню
@@ -80,4 +80,16 @@ void game::GameMenu::MoveDown()
 void game::GameMenu::draw(sf::RenderWindow& window)
 {
 	for (int i = 0; i < max_menu; i++) window.draw(mainMenu[i]);
+}
+
+void game::GameMenu::setColotTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor) 
+{
+	menu_text_color = menColor;
+	chose_text_color = ChoColor;
+	border_color = BordColor;
+	for (int i=0;i< max_menu;i++){
+	mainMenu[i].setFillColor(menu_text_color);
+	mainMenu[i].setOutlineColor(border_color);
+     }
+	mainMenu[mainMenuSelected].setFillColor(chose_text_color);
 }

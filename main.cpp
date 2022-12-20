@@ -20,7 +20,8 @@ void GamеStart()
 
     RectangleShape background_play(Vector2f(1280, 720));
     Texture texture_play;
-    texture_play.loadFromFile("image/menu4.jpg");
+    if (!texture_play.loadFromFile("image/menu4.jpg")) std::cout << "No image is here";
+   
     background_play.setTexture(&texture_play);
 
     while (Play.isOpen())
@@ -46,7 +47,8 @@ void Options()
 
     RectangleShape background_opt(Vector2f(1280, 720));
     Texture texture_opt;
-    texture_opt.loadFromFile("image/menu1.jpg");
+    if (!texture_opt.loadFromFile("image/menu1.jpg")) std::cout << "No image is here";
+    
     background_opt.setTexture(&texture_opt);
     while (Options.isOpen())
     {
@@ -72,7 +74,8 @@ void About_Game()
 
     RectangleShape background_ab(Vector2f(1280, 720));
     Texture texture_ab;
-    texture_ab.loadFromFile("image/menu2.jpg");
+    if (!texture_ab.loadFromFile("image/menu2.jpg")) std::cout << "No image is here";
+    
     background_ab.setTexture(&texture_ab);
 
     while (About.isOpen())
@@ -98,19 +101,17 @@ int main()
     RenderWindow window(VideoMode(1280, 720), L"Моя игра", Style::Fullscreen);
     window.setMouseCursorVisible(false);
    
+    float center[4]{ 0,-70,-10,-15 };
+    String name_menu[4]{ L"Старт",L"Настройки", L"О игре",L"Выход" };
     game::GameMenu mymenu(550, 250);
+    mymenu.setColotTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
+    for (int i = 0; i < 4; i++) { 
+        mymenu.setPositionX(i, center[i]);
+        mymenu.setStringMenu(i, name_menu[i]); }
 
-    mymenu.setStringMenu(0, L"Старт");
-    mymenu.setPositionX(1, -70);
-    mymenu.setStringMenu(1, L"Настройки");
-    mymenu.setPositionX(2, -10);
-    mymenu.setStringMenu(2, L"О игре");
-    mymenu.setPositionX(3, -15);
-    mymenu.setStringMenu(3, L"Выход");
-    
     RectangleShape background(Vector2f(1280, 720));
     Texture texture_window;
-    texture_window.loadFromFile("image/menu9.jpg");
+    if (!texture_window.loadFromFile("image/menu9.jpg")) std::cout << "No image is here";
     background.setTexture(&texture_window);
 
     Text Titul;
@@ -120,9 +121,7 @@ int main()
         std::cout << "No font is here";
     }
     Titul.setFont(font);
-    InitText(Titul,250,50,L"Пчела на работе",100, Color(237,147,0),3);
-
-
+    InitText(Titul,320,50,L"Апокалипсис",100, Color(237,147,0),3);
 
     while (window.isOpen())
     {

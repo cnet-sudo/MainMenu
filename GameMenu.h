@@ -33,9 +33,9 @@ public:
 
 	void setColotTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor);  // Цвет меню
 
-	void setPositionX(int index, float x1);  // Отцентров отдельных пунктов меню
+	void setPositionX(int index, float x1);         // Отцентров отдельных пунктов меню
 	
-	int getMainMenuPressed()                 // Возвращае номер выбраного элемента
+	int getMainMenuPressed()                        // Возвращае номер выбраного элемента
 	{
 		return mainMenuSelected;
 	}
