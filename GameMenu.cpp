@@ -24,19 +24,18 @@ void game::GameMenu::setPositionX(int index, float x1)
 game::GameMenu::GameMenu(float menux, float menuy, int sizeFont, int step, int len_menu)
 {
 	if (len_menu < 2) len_menu = 2;
-	size_font = sizeFont;
-	if (!font.loadFromFile("font/troika.otf"))
-	{
-		std::cout << "No font is here"; 
-	}
-	
+	size_font = sizeFont; // Размер шрифта
+	// Загрузка шрифта
+	if (!font.loadFromFile("font/troika.otf")) exit(32);
+		
 	menu_text_color=sf::Color::White;      // Цвет меню
 	chose_text_color=sf::Color::Yellow;;   // Цвет выбора меню
 	border_color=sf::Color::Black;;        // Цвет обводки текста
-	max_menu = len_menu;
-	mainMenu = new sf::Text[max_menu];
+	max_menu = len_menu;                   // Количество пунктов меню
+	mainMenu = new sf::Text[max_menu];     // Динамический массив пунктов меню
+	
 	for (int i = 0, ypos = menuy; i < max_menu; i++, ypos += step) 
-		setInitFont(mainMenu[i], std::to_string(i)+" name", menux, ypos);
+	setInitFont(mainMenu[i], std::to_string(i)+" name", menux, ypos);
 	
 	mainMenuSelected = 0;
 	mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
@@ -87,6 +86,7 @@ void game::GameMenu::setColotTextMenu(sf::Color menColor, sf::Color ChoColor, sf
 	menu_text_color = menColor;
 	chose_text_color = ChoColor;
 	border_color = BordColor;
+
 	for (int i=0;i< max_menu;i++){
 	mainMenu[i].setFillColor(menu_text_color);
 	mainMenu[i].setOutlineColor(border_color);

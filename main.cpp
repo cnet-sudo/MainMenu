@@ -2,7 +2,7 @@
 #include"GameMenu.h"
 
 using namespace sf;
-
+// функция настройки текста
 void InitText(Text & mtext,float xpos, float ypos,String str, int size_font=60, Color menu_text_color=Color::White,int bord=0, Color border_color = Color::Black)
 {
     mtext.setCharacterSize(size_font);
@@ -13,14 +13,14 @@ void InitText(Text & mtext,float xpos, float ypos,String str, int size_font=60, 
     mtext.setOutlineColor(border_color);
 
 }
-
+// Игра
 void GamеStart()
 {
     RenderWindow Play(VideoMode(1280, 720), L"Уровень 1", Style::Fullscreen);
 
     RectangleShape background_play(Vector2f(1280, 720));
     Texture texture_play;
-    if (!texture_play.loadFromFile("image/menu4.jpg")) std::cout << "No image is here";
+    if (!texture_play.loadFromFile("image/menu4.jpg")) exit(1);
    
     background_play.setTexture(&texture_play);
 
@@ -40,14 +40,14 @@ void GamеStart()
         Play.display();
     }
 }
-
+// Настройки игры
 void Options() 
 {
     RenderWindow Options(VideoMode(1280, 720), L"Настройки", Style::Fullscreen);
 
     RectangleShape background_opt(Vector2f(1280, 720));
     Texture texture_opt;
-    if (!texture_opt.loadFromFile("image/menu1.jpg")) std::cout << "No image is here";
+    if (!texture_opt.loadFromFile("image/menu1.jpg")) exit(2);
     
     background_opt.setTexture(&texture_opt);
     while (Options.isOpen())
@@ -67,14 +67,14 @@ void Options()
     }
 
 }
-
+// Описание игры
 void About_Game() 
 {
     RenderWindow About(VideoMode(1280, 720), L"О игре", Style::Fullscreen);
 
     RectangleShape background_ab(Vector2f(1280, 720));
     Texture texture_ab;
-    if (!texture_ab.loadFromFile("image/menu2.jpg")) std::cout << "No image is here";
+    if (!texture_ab.loadFromFile("image/menu2.jpg")) exit(3);
     
     background_ab.setTexture(&texture_ab);
 
@@ -100,28 +100,32 @@ int main()
     
     RenderWindow window(VideoMode(1280, 720), L"Моя игра", Style::Fullscreen);
     window.setMouseCursorVisible(false);
-   
+    // Координаты выравнивания текста
     float center[4]{ 0,-70,-10,-15 };
+    // Название пунктов меню
     String name_menu[4]{ L"Старт",L"Настройки", L"О игре",L"Выход" };
+    // Объект меню
     game::GameMenu mymenu(550, 250);
+    // Установка цвета отображения меню
     mymenu.setColotTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
+
     for (int i = 0; i < 4; i++) { 
         mymenu.setPositionX(i, center[i]);
         mymenu.setStringMenu(i, name_menu[i]); }
 
+    
     RectangleShape background(Vector2f(1280, 720));
     Texture texture_window;
-    if (!texture_window.loadFromFile("image/menu9.jpg")) std::cout << "No image is here";
+    if (!texture_window.loadFromFile("image/menu9.jpg")) return 4;
     background.setTexture(&texture_window);
 
     Text Titul;
     Font font;
-    if (!font.loadFromFile("font/troika.otf"))
-    {
-        std::cout << "No font is here";
-    }
+    if (!font.loadFromFile("font/troika.otf")) return 5;
+   
     Titul.setFont(font);
     InitText(Titul,320,50,L"Апокалипсис",100, Color(237,147,0),3);
+
 
     while (window.isOpen())
     {
@@ -149,6 +153,7 @@ int main()
             }
         }
         
+       
         window.clear(Color::Blue);
         window.draw(background);
         window.draw(Titul);
