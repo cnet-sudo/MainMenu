@@ -135,6 +135,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -150,6 +152,8 @@
     <None Include="sfml-window-d-2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animator.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="GameMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

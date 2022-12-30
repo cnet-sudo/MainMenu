@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include"GameMenu.h"
 #include<SFML/Audio.hpp>
+#include "Animator.h"
 
 using namespace sf;
 // функция настройки текста
@@ -120,9 +121,16 @@ int main()
     sound_return.setBuffer(buf_return);
 
     Music music;
-    if (!music.openFromFile("audio/Anxiety.ogg")) return 25; 
+    if (!music.openFromFile("audio/horror.ogg")) return 25; 
     music.setLoop(true);
+    music.setVolume(50);
     music.play();
+
+    Music musicF;
+    if (!musicF.openFromFile("audio/faer.ogg")) return 28;
+    musicF.setLoop(true);
+    musicF.setVolume(50);
+    musicF.play();
    
 
     // Координаты выравнивания текста
@@ -157,6 +165,17 @@ int main()
     Titul.setFont(font);
     InitText(Titul,480,50,L"Апокалипсис",150, Color(237,147,0),3);
 
+    Vector2i spriteSize(300, 313);
+
+    Sprite sprite;
+    sprite.setPosition(440, 730);
+    Animator animator(sprite);
+
+    auto& idleAnimation = animator.CreateAnimation("Idle", "image/f.png", seconds(1), true);
+
+    idleAnimation.AddFrames(Vector2i(0, 0), spriteSize, 5, 4);
+
+    Clock clock;
 
     while (window.isOpen())
     {
@@ -173,26 +192,29 @@ int main()
                   if (event.key.code == Keyboard::Down) { sound.play(); mymenu.MoveDown(); }  // вниз
                 if (event.key.code == Keyboard::Return)                    // ввод
                 {   
-                    music.pause();
+                    music.pause(); musicF.pause();
                     sound_return.play();
                     // Переходим на выбранный пункт меню
                     switch (mymenu.getMainMenuPressed())
                     {
-                    case 0:GamеStart(); music.play(); break;
-                    case 1:Options(); music.play(); break;
-                    case 2:About_Game(); music.play(); break;
-                    case 3:window.close(); break;
-                   
+                    case 0:GamеStart(); break;
+                    case 1:Options(); break;
+                    case 2:About_Game();  break;
+                    case 3:window.close(); break;           
                     }  
+                    music.play(); musicF.play();
                 } 
               }
         }
         
+        Time deltaTime = clock.restart();
+        animator.Update(deltaTime);
        
         window.clear();
         window.draw(background);
         window.draw(Titul);
-        mymenu.draw(window);  
+        mymenu.draw(window); 
+        window.draw(sprite);
         window.display();
     }
     return 0;
