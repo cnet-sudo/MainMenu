@@ -107,9 +107,10 @@ void About_Game()
 
 int main()
 {
-   
-    RenderWindow window(VideoMode::getDesktopMode(), L"Моя игра", Style::Fullscreen);
-    window.setVerticalSyncEnabled(true);
+    RenderWindow window;
+    bool aktivwindow = false;
+    window.create(VideoMode::getDesktopMode(), L"Моя игра", Style::Fullscreen);
+    window.setVisible(false);
     window.setMouseCursorVisible(false); //отключаем видимость курсора
 
     SoundBuffer buffer,buf_return;
@@ -151,8 +152,20 @@ int main()
     // Устанавливаем фон экрана меню
     float width = VideoMode::getDesktopMode().width;
     float height = VideoMode::getDesktopMode().height;
+    
+
+    Texture texture_back;
+    if (!texture_back.loadFromFile("image/t.jpg")) return 51;
+    Sprite backgroundBlack;
+    backgroundBlack.setColor(sf::Color(255, 255, 255, 255));
+    backgroundBlack.setTexture(texture_back);
+    backgroundBlack.setTextureRect(IntRect(0, 0, 1920, 1080));
+    float alpha = 255;
+
+
 
     RectangleShape background(Vector2f(1920, 1080));
+
     Texture texture_window;
     if (!texture_window.loadFromFile("image/menu9.jpg")) return 4;
     background.setTexture(&texture_window);
@@ -177,7 +190,7 @@ int main()
    
 
     Clock clock;
-
+    
     while (window.isOpen())
     {
         Event event;
@@ -210,12 +223,21 @@ int main()
         
         Time deltaTime = clock.restart();
         animator.Update(deltaTime);
+
+        if (alpha > 0)
+        {
+            alpha -= 0.1;
+            backgroundBlack.setColor(Color(255, 255, 255, alpha));
+        }
        
         window.clear();
         window.draw(background);
         window.draw(Titul);
         mymenu.draw(window); 
         window.draw(sprite);
+        window.draw(backgroundBlack);
+        if (!aktivwindow) { aktivwindow = true; window.setVisible(true); }
+       
         window.display();
     }
     return 0;
