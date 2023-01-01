@@ -14,4 +14,4 @@ cmake --build build --config Release
 
 cmake --build build --config Debug
 
-PMainMenu to assign as a startup project
+PMainMenu to assign as a startup project VS
