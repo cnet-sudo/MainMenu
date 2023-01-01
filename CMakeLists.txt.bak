@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 3.21)
+project(GameMenu VERSION 0.0.1 LANGUAGES CXX)
+
+include(FetchContent)
+FetchContent_Declare(SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 2.6.x)
+FetchContent_MakeAvailable(SFML)
+
+
+add_executable(Clock main.cpp SFMLWorldTime.cpp SFMLWorldTime.h )
+
+
+add_custom_command(TARGET Clock POST_BUILD
+                   
+                   COMMAND ${CMAKE_COMMAND}
+                   ARGS -E copy_directory
+                        ${PROJECT_SOURCE_DIR}/lib
+                        $<TARGET_FILE_DIR:Clock>/lib
+                   VERBATIM)
+add_custom_command(TARGET Clock POST_BUILD                
+                   COMMAND ${CMAKE_COMMAND}
+                   ARGS -E copy_directory
+                        ${PROJECT_SOURCE_DIR}/Image
+                        $<TARGET_FILE_DIR:Clock>/Image
+                   VERBATIM)
+target_link_libraries(Clock PRIVATE sfml-graphics sfml-system sfml-window)
+target_compile_features(Clock PRIVATE cxx_std_14)
+if (WIN32 AND BUILD_SHARED_LIBS)
+    add_custom_command(TARGET Clock POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Clock> $<TARGET_FILE_DIR:Clock> COMMAND_EXPAND_LISTS)
+endif()
+
+install(TARGETS Clock)
+
+# Директория с СMakeLists.txt
+# cmake -S . -B build
+# cmake --build build --config Release
+# Для запуска проекта выбрать активный проект

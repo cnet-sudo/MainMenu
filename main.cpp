@@ -168,12 +168,13 @@ int main()
     Vector2i spriteSize(300, 313);
 
     Sprite sprite;
-    sprite.setPosition(440, 730);
+    sprite.setPosition(440, 780);
     Animator animator(sprite);
 
     auto& idleAnimation = animator.CreateAnimation("Idle", "image/f.png", seconds(1), true);
-
+    
     idleAnimation.AddFrames(Vector2i(0, 0), spriteSize, 5, 4);
+   
 
     Clock clock;
 
