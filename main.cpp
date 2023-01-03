@@ -230,6 +230,7 @@ int main()
             backgroundBlack.setColor(Color(255, 255, 255, alpha));
         }
 
+              
         window.clear();
         window.draw(background);
         window.draw(Titul);
