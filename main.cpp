@@ -5,7 +5,7 @@
 
 using namespace sf;
 // функция настройки текста
-void InitText(Text & mtext,float xpos, float ypos,String str, int size_font=60, Color menu_text_color=Color::White,int bord=0, Color border_color = Color::Black)
+void InitText(Text& mtext, float xpos, float ypos, String str, int size_font = 60, Color menu_text_color = Color::White, int bord = 0, Color border_color = Color::Black)
 {
     mtext.setCharacterSize(size_font);
     mtext.setPosition(xpos, ypos);
@@ -19,8 +19,8 @@ void InitText(Text & mtext,float xpos, float ypos,String str, int size_font=60, 
 void GamеStart()
 {
     RenderWindow Play(VideoMode::getDesktopMode(), L"Уровень 1", Style::Fullscreen);
-      
-    
+
+
     RectangleShape background_play(Vector2f(1920, 1080));
 
     Texture texture_play;
@@ -34,7 +34,7 @@ void GamеStart()
         {
             if (event_play.type == Event::KeyPressed)
             {
-                if (event_play.key.code == Keyboard::Escape) { Play.close();}
+                if (event_play.key.code == Keyboard::Escape) { Play.close(); }
             }
         }
         Play.clear();
@@ -43,14 +43,14 @@ void GamеStart()
     }
 }
 // Настройки игры
-void Options() 
+void Options()
 {
     RenderWindow Options(VideoMode::getDesktopMode(), L"Настройки", Style::Fullscreen);
 
     RectangleShape background_opt(Vector2f(1920, 1080));
     Texture texture_opt;
     if (!texture_opt.loadFromFile("image/menu1.jpg")) exit(2);
-    
+
     background_opt.setTexture(&texture_opt);
     while (Options.isOpen())
     {
@@ -70,7 +70,7 @@ void Options()
 
 }
 // Описание игры
-void About_Game() 
+void About_Game()
 {
     RenderWindow About(VideoMode::getDesktopMode(), L"О игре", Style::Fullscreen);
 
@@ -113,16 +113,16 @@ int main()
     window.setVisible(false);
     window.setMouseCursorVisible(false); //отключаем видимость курсора
 
-    SoundBuffer buffer,buf_return;
-    
+    SoundBuffer buffer, buf_return;
+
     if (!buffer.loadFromFile("audio/audiomenu2.wav")) return 22;
     if (!buf_return.loadFromFile("audio/audiomenu5.wav")) return 22;
-    Sound sound,sound_return;
+    Sound sound, sound_return;
     sound.setBuffer(buffer);
     sound_return.setBuffer(buf_return);
 
     Music music;
-    if (!music.openFromFile("audio/horror.ogg")) return 25; 
+    if (!music.openFromFile("audio/horror.ogg")) return 25;
     music.setLoop(true);
     music.setVolume(50);
     music.play();
@@ -132,27 +132,27 @@ int main()
     musicF.setLoop(true);
     musicF.setVolume(50);
     musicF.play();
-   
+
 
     // Координаты выравнивания текста
     float center[4]{ 0,-120,-20,-30 };
     // Название пунктов меню
     String name_menu[4]{ L"Старт",L"Настройки", L"О игре",L"Выход" };
     // Объект меню
-    game::GameMenu mymenu(800,350,100,120);
+    game::GameMenu mymenu(800, 350, 100, 120);
     // Установка цвета отображения меню
     mymenu.setColotTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
     // Переименовываем пункты меню
-    for (int i = 0; i < 4; i++) { 
+    for (int i = 0; i < 4; i++) {
         mymenu.setPositionX(i, center[i]);
-        mymenu.setStringMenu(i, name_menu[i]); 
+        mymenu.setStringMenu(i, name_menu[i]);
     }
 
 
     // Устанавливаем фон экрана меню
     float width = VideoMode::getDesktopMode().width;
     float height = VideoMode::getDesktopMode().height;
-    
+
 
     Texture texture_back;
     if (!texture_back.loadFromFile("image/t.jpg")) return 51;
@@ -176,7 +176,7 @@ int main()
     // Текст с названием экрана
     Text Titul;
     Titul.setFont(font);
-    InitText(Titul,480,50,L"Апокалипсис",150, Color(237,147,0),3);
+    InitText(Titul, 480, 50, L"Апокалипсис", 150, Color(237, 147, 0), 3);
 
     Vector2i spriteSize(300, 313);
 
@@ -185,27 +185,27 @@ int main()
     Animator animator(sprite);
 
     auto& idleAnimation = animator.CreateAnimation("Idle", "image/f.png", seconds(1), true);
-    
+
     idleAnimation.AddFrames(Vector2i(0, 0), spriteSize, 5, 4);
-   
+
 
     Clock clock;
-    
+
     while (window.isOpen())
     {
         Event event;
         while (window.pollEvent(event))
         {
-            
-              if(event.type==Event::Closed) window.close();
-                
-              if (event.type==Event::KeyReleased) 
-              {
+
+            if (event.type == Event::Closed) window.close();
+
+            if (event.type == Event::KeyReleased)
+            {
                 // События выбра пунктов меню
-                  if (event.key.code == Keyboard::Up) { sound.play(); mymenu.MoveUp(); }       // вверх
-                  if (event.key.code == Keyboard::Down) { sound.play(); mymenu.MoveDown(); }  // вниз
+                if (event.key.code == Keyboard::Up) { sound.play(); mymenu.MoveUp(); }       // вверх
+                if (event.key.code == Keyboard::Down) { sound.play(); mymenu.MoveDown(); }  // вниз
                 if (event.key.code == Keyboard::Return)                    // ввод
-                {   
+                {
                     music.pause(); musicF.pause();
                     sound_return.play();
                     // Переходим на выбранный пункт меню
@@ -214,13 +214,13 @@ int main()
                     case 0:GamеStart(); break;
                     case 1:Options(); break;
                     case 2:About_Game();  break;
-                    case 3:window.close(); break;           
-                    }  
+                    case 3:window.close(); break;
+                    }
                     music.play(); musicF.play();
-                } 
-              }
+                }
+            }
         }
-        
+
         Time deltaTime = clock.restart();
         animator.Update(deltaTime);
 
@@ -229,15 +229,15 @@ int main()
             alpha -= 0.1;
             backgroundBlack.setColor(Color(255, 255, 255, alpha));
         }
-       
+
         window.clear();
         window.draw(background);
         window.draw(Titul);
-        mymenu.draw(window); 
+        mymenu.draw(window);
         window.draw(sprite);
         window.draw(backgroundBlack);
         if (!aktivwindow) { aktivwindow = true; window.setVisible(true); }
-       
+
         window.display();
     }
     return 0;
