@@ -107,10 +107,9 @@ void About_Game()
 
 int main()
 {
-    RenderWindow window;
-    bool aktivwindow = false;
-    window.create(VideoMode::getDesktopMode(), L"Моя игра", Style::Fullscreen);
-    window.setVisible(false);
+   
+    RenderWindow window(VideoMode::getDesktopMode(), L"Моя игра", Style::Fullscreen);
+    window.setVerticalSyncEnabled(true);
     window.setMouseCursorVisible(false); //отключаем видимость курсора
 
     SoundBuffer buffer,buf_return;
@@ -223,12 +222,6 @@ int main()
         
         Time deltaTime = clock.restart();
         animator.Update(deltaTime);
-
-        if (alpha > 0)
-        {
-            alpha -= 0.1;
-            backgroundBlack.setColor(Color(255, 255, 255, alpha));
-        }
        
         window.clear();
         window.draw(background);
