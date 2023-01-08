@@ -16,7 +16,7 @@ namespace game {
 
 		// Настройка шрифта меню
 		void setInitFont(sf::Text& text, std::string str, float xpos, float ypos);
-		sf::RenderWindow& mywindow;
+		sf::RenderWindow & mywindow;
 	public:
 
 		GameMenu(sf::RenderWindow& window, float menux, float menuy, int sizeFont = 60, int step = 80, int len_menu = 4);

@@ -1,5 +1,4 @@
 #include "GameMenu.h"
-#include "iostream"
 
 void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos, float ypos)
 {
@@ -31,7 +30,6 @@ void game::GameMenu::setPositionX(int posx)
 			break;
 		case 1:
 			nullx = mainMenu[i].getLocalBounds().width;
-			std::cout << nullx;
 			break;
 		case 2:
 			nullx = nullx = mainMenu[i].getLocalBounds().width / 2;
