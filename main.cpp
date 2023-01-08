@@ -28,7 +28,7 @@ int main()
 
     // Делаем окно windows прозрачным
     SetWindowLong(window.getSystemHandle(), GWL_EXSTYLE, GetWindowLong(window.getSystemHandle(), GWL_EXSTYLE) | WS_EX_LAYERED);
-    SetLayeredWindowAttributes(window.getSystemHandle(), 0, 10, LWA_COLORKEY);
+    SetLayeredWindowAttributes(window.getSystemHandle(), 0, 0, LWA_COLORKEY);
 
     window.setMouseCursorVisible(false); //отключаем видимость курсора
 
@@ -118,7 +118,7 @@ int main()
 
 
     Clock clock;
-
+    SetLayeredWindowAttributes(window.getSystemHandle(), 100, 0, LWA_COLORKEY);
     while (window.isOpen())
     {
         Event event;
