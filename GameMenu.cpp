@@ -1,6 +1,7 @@
 #include "GameMenu.h"
+#include "iostream"
 
-void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos,float ypos)
+void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos, float ypos)
 {
 	text.setFont(font);
 	text.setFillColor(menu_text_color);
@@ -11,32 +12,54 @@ void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos,flo
 	text.setOutlineColor(border_color);
 }
 
-void game::GameMenu::setStringMenu(int index, sf::String name) 
+void game::GameMenu::setStringMenu(int index, sf::String name)
 {
 	mainMenu[index].setString(name);
 }
 
-void game::GameMenu::setPositionX(int index, float x1)
+void game::GameMenu::setPositionX(int posx)
 {
-	mainMenu[index].setPosition(mainMenu[index].getPosition().x+x1, mainMenu[index].getPosition().y);
+
+	float nullx = 0;
+
+	for (int i = 0; i < max_menu; i++) {
+
+		switch (posx)
+		{
+		case 0:
+			nullx = 0;
+			break;
+		case 1:
+			nullx = mainMenu[i].getLocalBounds().width;
+			std::cout << nullx;
+			break;
+		case 2:
+			nullx = nullx = mainMenu[i].getLocalBounds().width / 2;
+			break;
+		}
+
+		mainMenu[i].setPosition(mainMenu[i].getPosition().x - nullx, mainMenu[i].getPosition().y);
+	}
+
 }
 
-game::GameMenu::GameMenu(float menux, float menuy, int sizeFont, int step, int len_menu)
+game::GameMenu::GameMenu(sf::RenderWindow& window, float menux, float menuy, int sizeFont, int step, int len_menu) :mywindow(window)
 {
 	if (len_menu < 2) len_menu = 2;
 	size_font = sizeFont; // Размер шрифта
+
 	// Загрузка шрифта
 	if (!font.loadFromFile("font/troika.otf")) exit(32);
-		
-	menu_text_color=sf::Color::White;      // Цвет меню
-	chose_text_color=sf::Color::Yellow;;   // Цвет выбора меню
-	border_color=sf::Color::Black;;        // Цвет обводки текста
+
+	menu_text_color = sf::Color::White;      // Цвет меню
+	chose_text_color = sf::Color::Yellow;;   // Цвет выбора меню
+	border_color = sf::Color::Black;;        // Цвет обводки текста
 	max_menu = len_menu;                   // Количество пунктов меню
 	mainMenu = new sf::Text[max_menu];     // Динамический массив пунктов меню
-	
-	for (int i = 0, ypos = menuy; i < max_menu; i++, ypos += step) 
-	setInitFont(mainMenu[i], std::to_string(i)+" name", menux, ypos);
-	
+
+	for (int i = 0, ypos = menuy; i < max_menu; i++, ypos += step)
+		setInitFont(mainMenu[i], std::to_string(i) + " name", menux, ypos);
+
 	mainMenuSelected = 0;
 	mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
 
@@ -44,7 +67,7 @@ game::GameMenu::GameMenu(float menux, float menuy, int sizeFont, int step, int l
 
 void game::GameMenu::MoveUp()
 {
-    mainMenuSelected--;
+	mainMenuSelected--;
 
 	if (mainMenuSelected >= 0) {
 		mainMenu[mainMenuSelected + 1].setFillColor(menu_text_color);
@@ -68,28 +91,28 @@ void game::GameMenu::MoveDown()
 	}
 	else
 	{
-		mainMenu[max_menu-1].setFillColor(menu_text_color);
+		mainMenu[max_menu - 1].setFillColor(menu_text_color);
 		mainMenuSelected = 0;
 		mainMenu[mainMenuSelected].setFillColor(chose_text_color);
 	}
-	
+
 }
 
 
-void game::GameMenu::draw(sf::RenderWindow& window)
+void game::GameMenu::draw()
 {
-	for (int i = 0; i < max_menu; i++) window.draw(mainMenu[i]);
+	for (int i = 0; i < max_menu; i++) mywindow.draw(mainMenu[i]);
 }
 
-void game::GameMenu::setColotTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor) 
+void game::GameMenu::setColotTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor)
 {
 	menu_text_color = menColor;
 	chose_text_color = ChoColor;
 	border_color = BordColor;
 
-	for (int i=0;i< max_menu;i++){
-	mainMenu[i].setFillColor(menu_text_color);
-	mainMenu[i].setOutlineColor(border_color);
-     }
+	for (int i = 0; i < max_menu; i++) {
+		mainMenu[i].setFillColor(menu_text_color);
+		mainMenu[i].setOutlineColor(border_color);
+	}
 	mainMenu[mainMenuSelected].setFillColor(chose_text_color);
 }

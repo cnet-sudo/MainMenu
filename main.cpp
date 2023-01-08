@@ -29,25 +29,25 @@ int main()
     // Делаем окно windows прозрачным
     SetWindowLong(window.getSystemHandle(), GWL_EXSTYLE, GetWindowLong(window.getSystemHandle(), GWL_EXSTYLE) | WS_EX_LAYERED);
     SetLayeredWindowAttributes(window.getSystemHandle(), 0, 10, LWA_COLORKEY);
-    
+
     window.setMouseCursorVisible(false); //отключаем видимость курсора
-    
+
     // Размер экрана
     float width = VideoMode::getDesktopMode().width;
     float height = VideoMode::getDesktopMode().height;
-    
+
     //Заставка загрузки
     Texture texthome;
     texthome.loadFromFile("Image/z1.png");
     RectangleShape homecls(Vector2f(640, 280));
     homecls.setTexture(&texthome);
-    homecls.setPosition(Vector2f(width/4+50, height/3));
+    homecls.setPosition(Vector2f(width / 2 - homecls.getLocalBounds().width/2, height / 2- homecls.getLocalBounds().height/2));
     window.draw(homecls);
     window.display();
-    
+
     // Звуковые эффекты
-    
-      
+
+
     SoundBuffer buffer, buf_return;
 
     if (!buffer.loadFromFile("audio/audiomenu2.wav")) return 22;
@@ -69,21 +69,16 @@ int main()
     musicF.play();
 
 
-    // Координаты выравнивания текста
-    float center[4]{ 0,-120,-20,-30 };
     // Название пунктов меню
     String name_menu[4]{ L"Старт",L"Настройки", L"О игре",L"Выход" };
-    
+
     // Объект меню
-    game::GameMenu mymenu(800, 350, 100, 120);
+    game::GameMenu mymenu(window, 950, 350, 100, 120);
     // Установка цвета отображения меню
     mymenu.setColotTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
     // Переименовываем пункты меню
-    for (int i = 0; i < 4; i++) {
-        mymenu.setPositionX(i, center[i]);
-        mymenu.setStringMenu(i, name_menu[i]);
-    }
-
+    for (int i = 0; i < 4; i++) mymenu.setStringMenu(i, name_menu[i]);
+    mymenu.setPositionX(2);
     // Плавное появление из черного
     Texture texture_back;
     if (!texture_back.loadFromFile("image/t.jpg")) return 51;
@@ -109,7 +104,7 @@ int main()
     Titul.setFont(font);
     InitText(Titul, 480, 50, L"Апокалипсис", 150, Color(237, 147, 0), 3);
 
-    
+
     // Анимация костра
     Vector2i spriteSize(300, 313);
 
@@ -169,7 +164,7 @@ int main()
         window.clear();
         window.draw(background);
         window.draw(Titul);
-        mymenu.draw(window);
+        mymenu.draw();
         window.draw(sprite);
         window.draw(backgroundBlack);
         window.display();
@@ -178,7 +173,7 @@ int main()
 }
 
 // функция настройки текста
-void InitText(Text& mtext, float xpos, float ypos, String str, int size_font, Color menu_text_color, int bord, Color border_color )
+void InitText(Text& mtext, float xpos, float ypos, String str, int size_font, Color menu_text_color, int bord, Color border_color)
 {
     mtext.setCharacterSize(size_font);
     mtext.setPosition(xpos, ypos);
