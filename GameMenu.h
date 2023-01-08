@@ -20,12 +20,12 @@ class GameMenu
 public:
 	
 	GameMenu(float menux, float menuy, int sizeFont = 60, int step = 80, int len_menu = 4);
-	// Рисуем меню
-	void draw(sf::RenderWindow & window);
+	
+	void draw(sf::RenderWindow & window); // Рисуем меню
 
-	void MoveUp();               // Перемещение меню вверх
+	void MoveUp();                       // Перемещение меню вверх
 
-	void MoveDown();             // Перемещение меню вниз
+	void MoveDown();                     // Перемещение меню вниз
     
 	void setStringMenu(int index,sf::String name);  // Текст меню
 
