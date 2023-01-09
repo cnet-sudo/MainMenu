@@ -46,8 +46,6 @@ int main()
     window.display();
 
     // Звуковые эффекты
-
-
     SoundBuffer buffer, buf_return;
 
     if (!buffer.loadFromFile("audio/audiomenu2.wav")) return 22;
