@@ -75,8 +75,9 @@ int main()
     // Установка цвета отображения меню
     mymenu.setColotTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
     // Переименовываем пункты меню
-    for (int i = 0; i < 4; i++) mymenu.setStringMenu(i, name_menu[i]);
+    mymenu.setStringMenu(name_menu);
     mymenu.setPositionX(2);
+
     // Плавное появление из черного
     Texture texture_back;
     if (!texture_back.loadFromFile("image/t.jpg")) return 51;

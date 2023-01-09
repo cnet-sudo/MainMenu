@@ -1,6 +1,6 @@
 #include "GameMenu.h"
 
-void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos, float ypos)
+void game::GameMenu::setInitText(sf::Text& text, std::string str, float xpos, float ypos)
 {
 	text.setFont(font);
 	text.setFillColor(menu_text_color);
@@ -11,9 +11,11 @@ void game::GameMenu::setInitFont(sf::Text& text, std::string str, float xpos, fl
 	text.setOutlineColor(border_color);
 }
 
-void game::GameMenu::setStringMenu(int index, sf::String name)
+void game::GameMenu::setStringMenu(sf::String name[])
 {
-	mainMenu[index].setString(name);
+	int maxindex = name->getSize();
+
+	for (int i = 0; i < maxindex - 1; i++) mainMenu[i].setString(name[i]);
 }
 
 void game::GameMenu::setPositionX(int posx)
@@ -56,7 +58,7 @@ game::GameMenu::GameMenu(sf::RenderWindow& window, float menux, float menuy, int
 	mainMenu = new sf::Text[max_menu];     // Динамический массив пунктов меню
 
 	for (int i = 0, ypos = menuy; i < max_menu; i++, ypos += step)
-		setInitFont(mainMenu[i], std::to_string(i) + " name", menux, ypos);
+		setInitText(mainMenu[i], std::to_string(i) + " name", menux, ypos);
 
 	mainMenuSelected = 0;
 	mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
