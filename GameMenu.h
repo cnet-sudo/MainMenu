@@ -21,7 +21,7 @@ namespace game {
 		// Настройка текста меню
 		void setInitText(sf::Text& text, sf::String str, float xpos, float ypos);
 
-		sf::RenderWindow& mywindow;
+		sf::RenderWindow& mywindow;                        // Ссылка на графическое окно
 	public:
 
 		GameMenu(sf::RenderWindow& window, float menux, float menuy, sf::String name[], int sizeFont = 60, int step = 80);
@@ -32,11 +32,11 @@ namespace game {
 
 		void MoveDown();                                 // Перемещение меню вниз
 
-		void setColotTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor);  // Цвет меню
+		void setColorTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor);  // Цвет меню
 
-		void setPositionX(int posx);                    // Выравнивание положения меню
+		void AlignMenu(int posx);                    // Выравнивание положения меню
 
-		int getMainMenuPressed()                        // Возвращае номер выбраного элемента
+		int getSelectedMenuNumber()                        // Возвращае номер выбраного элемента
 		{
 			return mainMenuSelected;
 		}

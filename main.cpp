@@ -73,8 +73,8 @@ int main()
     // Объект меню
     game::GameMenu mymenu(window, 950, 350, name_menu, 100, 120);
     // Установка цвета отображения меню
-    mymenu.setColotTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
-    mymenu.setPositionX(2);
+    mymenu.setColorTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
+    mymenu.AlignMenu(2);
 
     // Плавное появление из черного
     Texture texture_back;
@@ -134,7 +134,7 @@ int main()
                     music.pause(); musicF.pause();
                     sound_return.play();
                     // Переходим на выбранный пункт меню
-                    switch (mymenu.getMainMenuPressed())
+                    switch (mymenu.getSelectedMenuNumber())
                     {
                     case 0:GamеStart(); break;
                     case 1:Options(); break;
