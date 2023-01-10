@@ -122,8 +122,6 @@ int main()
         while (window.pollEvent(event))
         {
 
-            if (event.type == Event::Closed || event.key.code == Keyboard::Escape) window.close();
-
             if (event.type == Event::KeyReleased)
             {
                 // События выбра пунктов меню
@@ -136,8 +134,8 @@ int main()
                     // Переходим на выбранный пункт меню
                     switch (mymenu.getSelectedMenuNumber())
                     {
-                    case 0:GamеStart(); break;
-                    case 1:Options(); break;
+                    case 0:GamеStart();  break;
+                    case 1:Options();     break;
                     case 2:About_Game();  break;
                     case 3:window.close(); break;
                     }
