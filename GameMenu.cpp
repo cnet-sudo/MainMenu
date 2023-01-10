@@ -47,7 +47,7 @@ game::GameMenu::GameMenu(sf::RenderWindow& window, float menux, float menuy, sf:
 
 	for (int i = 0, ypos = menu_Y; i < max_menu; i++, ypos += menu_Step) setInitText(mainMenu[i], name[i], menu_X, ypos);
 	mainMenuSelected = 0;
-	mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
+	mainMenu[mainMenuSelected].setFillColor(chose_text_color);
 }
 
 void game::GameMenu::MoveUp()
