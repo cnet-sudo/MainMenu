@@ -71,7 +71,7 @@ int main()
     String name_menu[4]{ L"Старт",L"Настройки", L"О игре",L"Выход" };
 
     // Объект меню
-    game::GameMenu mymenu(window, 950, 350, name_menu, 100, 120);
+    game::GameMenu mymenu(window, 950, 350,4, name_menu, 100, 120);
     // Установка цвета отображения меню
     mymenu.setColorTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
     mymenu.AlignMenu(2);

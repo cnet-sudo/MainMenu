@@ -7,8 +7,8 @@ namespace game {
 	{
 		float menu_X;                                     // Координаты меню по X
 		float menu_Y;				                      // Координаты меню по Y
-		int menu_Step;                                    // Растояние между пунктами меню
-		int max_menu;                                     // Максимальное количество пунктов меню
+		int menu_Step;                                    // Расстояние между пунктами меню
+		int max_menu  ;                                   // Максимальное количество пунктов меню
 		int size_font;                                    // Размер шрифта
 		int mainMenuSelected;                             // Номер текущего пункта меню 
 		sf::Font font;                                    // Шрифт меню 
@@ -24,19 +24,20 @@ namespace game {
 		sf::RenderWindow& mywindow;                        // Ссылка на графическое окно
 	public:
 
-		GameMenu(sf::RenderWindow& window, float menux, float menuy, sf::String name[], int sizeFont = 60, int step = 80);
+		GameMenu(sf::RenderWindow& window, float menux, float menuy, int index,sf::String name[], int sizeFont = 60, int step = 80);
 
 		void draw();                                     // Рисуем меню
 
-		void MoveUp();                                   // Перемещение меню вверх
+		void MoveUp();                                   // Перемещение выбора меню вверх
 
-		void MoveDown();                                 // Перемещение меню вниз
+		void MoveDown();                                 // Перемещение выбора меню вниз
 
-		void setColorTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor);  // Цвет меню
+		// Цвет элементов игрового меню
+		void setColorTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor);
 
-		void AlignMenu(int posx);                    // Выравнивание положения меню
+		void AlignMenu(int posx);       // Выравнивание положения меню (по левому по правому по центру)
 
-		int getSelectedMenuNumber()                        // Возвращае номер выбраного элемента
+		int getSelectedMenuNumber()     // Возвращает номер выбраного элемента
 		{
 			return mainMenuSelected;
 		}

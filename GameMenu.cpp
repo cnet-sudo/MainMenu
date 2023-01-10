@@ -1,6 +1,5 @@
 #include "GameMenu.h"
 
-
 void game::GameMenu::setInitText(sf::Text& text, sf::String str, float xpos, float ypos)
 {
 	text.setFont(font);
@@ -37,17 +36,17 @@ void game::GameMenu::AlignMenu(int posx)
 
 }
 
-game::GameMenu::GameMenu(sf::RenderWindow& window, float menux, float menuy, sf::String name[], int sizeFont, int step)
+game::GameMenu::GameMenu(sf::RenderWindow& window, float menux, float menuy,int index, sf::String name[], int sizeFont, int step)
 	:mywindow(window), menu_X(menux), menu_Y(menuy), size_font(sizeFont), menu_Step(step)
 {
 	// Загрузка шрифта
 	if (!font.loadFromFile("font/troika.otf")) exit(32);
-	max_menu = name->getSize()-1;
+	max_menu = index;
 	mainMenu = new sf::Text[max_menu];     // Динамический массив пунктов меню
 
 	for (int i = 0, ypos = menu_Y; i < max_menu; i++, ypos += menu_Step) setInitText(mainMenu[i], name[i], menu_X, ypos);
 	mainMenuSelected = 0;
-	mainMenu[mainMenuSelected].setFillColor(sf::Color::Yellow);
+	mainMenu[mainMenuSelected].setFillColor(chose_text_color);
 }
 
 void game::GameMenu::MoveUp()
