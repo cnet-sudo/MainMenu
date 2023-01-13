@@ -21,7 +21,7 @@ namespace game {
 														  // Настройка текста меню
 		void setInitText(sf::Text& text, sf::String str, float xpos, float ypos);
 
-		sf::RenderWindow& mywindow;                        // Ссылка на графическое окно
+		sf::RenderWindow& mywindow;                       // Ссылка на графическое окно
 	public:
 
 		GameMenu(sf::RenderWindow& window, float menux, float menuy, int index,sf::String name[], int sizeFont = 60, int step = 80);
