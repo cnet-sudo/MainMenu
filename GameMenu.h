@@ -8,7 +8,7 @@ namespace game {
 		float menu_X;                                     // Координаты меню по X
 		float menu_Y;				                      // Координаты меню по Y
 		int menu_Step;                                    // Расстояние между пунктами меню
-		int max_menu  ;                                   // Максимальное количество пунктов меню
+		int max_menu;                                     // Максимальное количество пунктов меню
 		int size_font;                                    // Размер шрифта
 		int mainMenuSelected;                             // Номер текущего пункта меню 
 		sf::Font font;                                    // Шрифт меню 
@@ -18,7 +18,7 @@ namespace game {
 		sf::Color chose_text_color = sf::Color::Yellow;    // Цвет выбора меню
 		sf::Color border_color = sf::Color::Black;         // Цвет обводки текста
 
-		// Настройка текста меню
+														  // Настройка текста меню
 		void setInitText(sf::Text& text, sf::String str, float xpos, float ypos);
 
 		sf::RenderWindow& mywindow;                        // Ссылка на графическое окно
@@ -32,7 +32,7 @@ namespace game {
 
 		void MoveDown();                                 // Перемещение выбора меню вниз
 
-		// Цвет элементов игрового меню
+		                                                 // Цвет элементов игрового меню
 		void setColorTextMenu(sf::Color menColor, sf::Color ChoColor, sf::Color BordColor);
 
 		void AlignMenu(int posx);       // Выравнивание положения меню (по левому по правому по центру)
