@@ -2,12 +2,20 @@
 #include"GameMenu.h"
 #include<SFML/Audio.hpp>
 #include "Animator.h"
-#include<windows.h>
+#include<Windows.h>
 
 using namespace sf;
 
+struct TextFormat
+{
+    int size_font = 60;
+    Color menu_text_color = Color::White;
+    float bord = 0.0f;
+    Color border_color = Color::Black;
+};
+
 // функция настройки текста
-void InitText(Text& mtext, float xpos, float ypos, String str, int size_font = 60, Color menu_text_color = Color::White, int bord = 0, Color border_color = Color::Black);
+void InitText(Text& mtext, float xpos, float ypos, const String & str,TextFormat Ftext);
 
 // Игровой процесс
 void GamеStart();
@@ -33,8 +41,8 @@ int main()
     window.setMouseCursorVisible(false); //отключаем видимость курсора
 
     // Размер экрана
-    float width = VideoMode::getDesktopMode().width;
-    float height = VideoMode::getDesktopMode().height;
+    auto width = static_cast<float>(VideoMode::getDesktopMode().width);
+    auto height = static_cast<float>(VideoMode::getDesktopMode().height);
 
     //Заставка загрузки
     Texture texthome;
@@ -46,11 +54,13 @@ int main()
     window.display();
 
     // Звуковые эффекты
-    SoundBuffer buffer, buf_return;
+    SoundBuffer buffer;
+    SoundBuffer buf_return;
 
     if (!buffer.loadFromFile("audio/audiomenu2.wav")) return 22;
     if (!buf_return.loadFromFile("audio/audiomenu5.wav")) return 22;
-    Sound sound, sound_return;
+    Sound sound;
+    Sound sound_return;
     sound.setBuffer(buffer);
     sound_return.setBuffer(buf_return);
 
@@ -68,10 +78,10 @@ int main()
 
 
     // Название пунктов меню
-    String name_menu[4]{ L"Старт",L"Настройки", L"О игре",L"Выход" };
+    std::vector<String> name_menu{ L"Старт",L"Настройки", L"О игре",L"Выход" };
 
     // Объект меню
-    game::GameMenu mymenu(window, 950, 350,4, name_menu, 100, 120);
+    game::GameMenu mymenu(window, 950, 350, 100, 120,name_menu);
     // Установка цвета отображения меню
     mymenu.setColorTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
     mymenu.AlignMenu(2);
@@ -99,7 +109,11 @@ int main()
     // Текст с названием экрана
     Text Titul;
     Titul.setFont(font);
-    InitText(Titul, 480, 50, L"Апокалипсис", 150, Color(237, 147, 0), 3);
+    TextFormat Ftext;
+    Ftext.size_font = 150;
+    Ftext.menu_text_color = Color(237, 147, 0);
+    Ftext.bord = 3;
+    InitText(Titul, 480, 50, L"Апокалипсис", Ftext);
 
 
     // Анимация костра
@@ -151,8 +165,8 @@ int main()
         // Плавное осветление экрана меню
         if (alpha > 0)
         {
-            alpha -= 0.05;
-            backgroundBlack.setColor(Color(255, 255, 255, alpha));
+            alpha -= 0.05f;
+            backgroundBlack.setColor(Color(255, 255, 255, static_cast<unsigned char>(alpha)));
         }
 
         // Область отрисовки объектов      
@@ -168,14 +182,14 @@ int main()
 }
 
 // функция настройки текста
-void InitText(Text& mtext, float xpos, float ypos, String str, int size_font, Color menu_text_color, int bord, Color border_color)
+void InitText(Text& mtext, float xpos, float ypos, const String & str, TextFormat Ftext)
 {
-    mtext.setCharacterSize(size_font);
+    mtext.setCharacterSize(Ftext.size_font);
     mtext.setPosition(xpos, ypos);
     mtext.setString(str);
-    mtext.setFillColor(menu_text_color);
-    mtext.setOutlineThickness(bord);
-    mtext.setOutlineColor(border_color);
+    mtext.setFillColor(Ftext.menu_text_color);
+    mtext.setOutlineThickness(Ftext.bord);
+    mtext.setOutlineColor(Ftext.border_color);
 
 }
 
@@ -251,7 +265,11 @@ void About_Game()
     // Текст с названием экрана
     Text Titul;
     Titul.setFont(font);
-    InitText(Titul, 500, 50, L"Описание игры", 120, Color(237, 147, 0), 3);
+    TextFormat Ftext;
+    Ftext.size_font = 120;
+    Ftext.menu_text_color = Color(237, 147, 0);
+    Ftext.bord = 3;
+    InitText(Titul, 500, 50, L"Описание игры", Ftext);
 
     while (About.isOpen())
     {
