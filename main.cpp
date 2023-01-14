@@ -92,7 +92,7 @@ int main()
     Sprite backgroundBlack;
     backgroundBlack.setColor(sf::Color(255, 255, 255, 255));
     backgroundBlack.setTexture(texture_back);
-    backgroundBlack.setTextureRect(IntRect(0, 0, width, height));
+    backgroundBlack.setTextureRect(IntRect(0, 0, static_cast<int>(width), static_cast<int>(height)));
     float alpha = 255;
 
 
