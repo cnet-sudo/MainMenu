@@ -152,6 +152,7 @@ int main()
                     case 1:Options();     break;
                     case 2:About_Game();  break;
                     case 3:window.close(); break;
+                    default:break;
                     }
                     music.play(); musicF.play();
                 }

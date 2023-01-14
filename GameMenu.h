@@ -19,7 +19,7 @@ namespace game {
 		sf::Color border_color = sf::Color::Black;         // Цвет обводки текста
 
 		// Настройка текста меню
-		void setInitText(sf::Text& text, const sf::String& str, float xpos, float ypos);
+		void setInitText(sf::Text& text, const sf::String& str, float xpos, float ypos) const;
 
 		sf::RenderWindow& mywindow;                       // Ссылка на графическое окно
 	public:
@@ -37,7 +37,7 @@ namespace game {
 
 		void AlignMenu(int posx);       // Выравнивание положения меню (по левому по правому по центру)
 
-		int getSelectedMenuNumber()     // Возвращает номер выбраного элемента
+		int getSelectedMenuNumber() const     // Возвращает номер выбраного элемента
 		{
 			return mainMenuSelected;
 		}

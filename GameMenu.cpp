@@ -1,7 +1,7 @@
 #include "GameMenu.h"
 #include <vector>
 
-void game::GameMenu::setInitText(sf::Text& text, const sf::String& str, float xpos, float ypos)
+void game::GameMenu::setInitText(sf::Text& text, const sf::String& str, float xpos, float ypos) const
 {
 	text.setFont(font);
 	text.setFillColor(menu_text_color);
@@ -30,6 +30,7 @@ void game::GameMenu::AlignMenu(int posx)
 		case 2:
 			nullx = mainMenu[i].getLocalBounds().width / 2;
 			break;
+		default:break;
 		}
 
 		mainMenu[i].setPosition(mainMenu[i].getPosition().x - nullx, mainMenu[i].getPosition().y);
@@ -38,12 +39,12 @@ void game::GameMenu::AlignMenu(int posx)
 }
 
 game::GameMenu::GameMenu(sf::RenderWindow& window, float menux, float menuy, int sizeFont, int step, std::vector<sf::String>& name)
-	:mywindow(window), menu_X(menux), menu_Y(menuy), size_font(sizeFont), menu_Step(step), mainMenu(name.size()), max_menu(name.size())
+	:menu_X(menux), menu_Y(menuy), menu_Step(step), max_menu(static_cast<int>(name.size())), size_font(sizeFont), mainMenu(name.size()), mywindow(window)
 {
 	if (!font.loadFromFile("font/troika.otf")) exit(32);
 
-	for (int i = 0, ypos = menu_Y; i < max_menu; i++, ypos += menu_Step)
-		setInitText(mainMenu[i], name[i], menu_X, ypos);
+	for (int i = 0, ypos = static_cast<int>(menu_Y); i < max_menu; i++, ypos += menu_Step)
+		setInitText(mainMenu[i], name[i], menu_X, static_cast<float>(ypos));
 	mainMenuSelected = 0;
 	mainMenu[mainMenuSelected].setFillColor(chose_text_color);
 }
