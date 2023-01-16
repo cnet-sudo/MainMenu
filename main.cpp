@@ -30,6 +30,7 @@ void About_Game();
 
 int main()
 {
+    AssetManager manager;
     // Создаём окно windows
     RenderWindow window;
     window.create(VideoMode::getDesktopMode(), L"Моя игра", Style::Fullscreen);

@@ -67,7 +67,6 @@ private:
 
 	//ссылка на спрайт
 	sf::Sprite& m_Sprite;
-	AssetManager manager;
 	sf::Time m_CurrentTime;
 	std::list<Animator::Animation> m_Animations;
 	Animator::Animation* m_CurrentAnimation;
